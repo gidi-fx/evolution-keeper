@@ -1,0 +1,14 @@
+name: Keep Evolution Alive
+on:
+  schedule:
+    - cron: '*/10 * * * *'
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Evolution API
+        run: |
+          curl -s -o /dev/null -H "apikey: ${{ secrets.API_KEY }}" https://evolution-api1.gidi.blitz.cloud/instance/fetchInstances
+          echo "Pinged at $(date)"
